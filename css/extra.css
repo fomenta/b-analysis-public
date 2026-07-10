@@ -391,16 +391,25 @@
 }
 
 /* Markmap */
+@keyframes markmap-reveal {
+  to {
+    visibility: visible;
+  }
+}
+
 .md-typeset .markmap {
   overflow-x: auto;
   overflow-y: hidden;
   cursor: grab;
   background: var(--md-default-bg-color);
   visibility: hidden; /* oculto hasta que JS calcula la altura final */
+  /* Fallback: revelar después de 6 s si markmap-rescale.js no cargó (HTML en caché antiguo) */
+  animation: markmap-reveal 0s 6s forwards;
 }
 
 .md-typeset .markmap.mm-ready {
   visibility: visible;
+  animation: none; /* cancelar el temporizador de fallback */
 }
 
 .md-typeset .markmap:active {
